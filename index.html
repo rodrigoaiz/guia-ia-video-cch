@@ -7,6 +7,9 @@
 <meta name="description" content="Guía paso a paso para crear objetos de aprendizaje en video con IA gratuita. Taller para profesores del Área de Matemáticas del CCH.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Nunito+Sans:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '\\(', right: '\\)', display: false}]})"></script>
 <style>
 /* Una columna de lectura, como un cuaderno de trabajo: pasos numerados y prompts listos para copiar */
 :root {
@@ -57,6 +60,7 @@ ol.steps li::marker { font-family: var(--display); font-weight: 700; color: var(
 ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.katex { white-space: nowrap; font-size: 1.05em; }
 code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft); padding: .1em .35em; border-radius: 4px; overflow-wrap: anywhere; }
 
 .prompt { position: relative; background: var(--code-bg); color: var(--code-fg); border-radius: 12px; min-width: 0; }
@@ -66,7 +70,7 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .copy { font: 700 14px var(--body); color: var(--code-bg); background: var(--code-key); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
 .copy:hover { filter: brightness(1.08); }
 
-.note { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.note { background: var(--accent-soft); border-radius: 4px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
 .note strong { color: var(--fg); }
 .route { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 
@@ -111,7 +115,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
 <span class="k">[Formato]</span> Entrégame: 1) el objetivo de aprendizaje en una frase; 2) el guion por escenas en una tabla: narración | qué se ve en pantalla | duración; 3) tres preguntas para pausar el video, con su respuesta esperada; 4) una actividad corta para después del video.
 <span class="k">[Límites]</span> Lenguaje sencillo y español de México. El video se verá en [el proyector del salón / el celular de los alumnos].</pre>
   </div>
-  <p>Si la respuesta no te convence, no empieces de cero: pide cambios en la misma conversación. Por ejemplo: “hazlo más corto”, “agrega un ejemplo con a negativa” o “la pregunta 2 es muy fácil”.</p>
+  <p>Si la respuesta no te convence, no empieces de cero: pide cambios en la misma conversación. Por ejemplo: “hazlo más corto”, “agrega un ejemplo con \(a\) negativa” o “la pregunta 2 es muy fácil”.</p>
 </section>
 
 <section aria-labelledby="e2">
@@ -148,7 +152,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
 <pre id="p2">Soy profesor de matemáticas de bachillerato. Hazme un video corto con Manim que muestre cómo a, b y c cambian la parábola y = ax² + bx + c. Textos en español, sin LaTeX. Escribe el archivo, renderízalo y si hay errores corrígelos tú. Al final dime dónde quedó el video.</pre>
   </div>
   <div class="note">
-    <p><strong>Mira el video completo.</strong> En nuestro ensayo el modelo gratuito lo hizo en menos de 2 minutos, pero puso el punto del vértice fuera de lugar y encimó dos textos. Se lo dijimos con el dato concreto (“en y = x² − 1.25x el vértice está en x = 0.625”) y lo corrigió en el segundo intento.</p>
+    <p><strong>Mira el video completo.</strong> En nuestro ensayo el modelo gratuito lo hizo en menos de 2 minutos, pero puso el punto del vértice fuera de lugar y encimó dos textos. Se lo dijimos con el dato concreto (“en \(y = x^2 - 1.25x\) el vértice está en \(x = 0.625\)”) y lo corrigió en el segundo intento.</p>
     <p><strong>Si se atora</strong> dos o tres veces en el mismo error, es momento de probar un modelo más capaz.</p>
     <p>Los modelos gratuitos cambian cada cierto tiempo y algunos pueden usar lo que escribes para entrenarse. No pongas datos de alumnos.</p>
   </div>
