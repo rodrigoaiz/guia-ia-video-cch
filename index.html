@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Del guion al video</title>
+<meta name="description" content="Guía paso a paso para crear objetos de aprendizaje en video con IA gratuita. Taller para profesores del Área de Matemáticas del CCH.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Nunito+Sans:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Una columna de lectura, como un cuaderno de trabajo: pasos numerados y prompts listos para copiar */
+:root {
+  --bg: #F6F4EE; --surface: #FDFBF6; --line: #E3DED2;
+  --fg: #14213D; --muted: #3D4A63; --accent: #9A5B0E; --accent-soft: #F3E3C7;
+  --code-bg: #14213D; --code-fg: #F6F4EE; --code-key: #E8A33D;
+  --display: 'Domine', Georgia, serif;
+  --body: 'Nunito Sans', Arial, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101A30; --surface: #17243F; --line: #2B3B5E;
+    --fg: #F1EEE6; --muted: #C3CCDD; --accent: #E8A33D; --accent-soft: #2E2A22;
+    --code-bg: #0A1222; --code-fg: #F1EEE6; --code-key: #E8A33D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101A30; --surface: #17243F; --line: #2B3B5E;
+  --fg: #F1EEE6; --muted: #C3CCDD; --accent: #E8A33D; --accent-soft: #2E2A22;
+  --code-bg: #0A1222; --code-fg: #F1EEE6; --code-key: #E8A33D;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 18px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+header { padding-block: 56px 8px; display: flex; flex-direction: column; gap: 12px; }
+.eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0; }
+h1 { font-family: var(--display); font-size: clamp(36px, 7vw, 56px); line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--display); font-size: clamp(26px, 4.5vw, 34px); line-height: 1.2; margin: 0; text-wrap: balance; }
+h3 { font-size: 20px; margin: 0; }
+p, ul, ol { margin: 0; }
+.lead { font-size: 20px; color: var(--muted); max-width: 62ch; }
+.byline { font-size: 15px; color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 18px; }
+section > p, li { max-width: 65ch; }
+ol.steps { padding-left: 1.4em; display: flex; flex-direction: column; gap: 12px; }
+ol.steps li::marker { font-family: var(--display); font-weight: 700; color: var(--accent); }
+ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft); padding: .1em .35em; border-radius: 4px; overflow-wrap: anywhere; }
+
+.prompt { position: relative; background: var(--code-bg); color: var(--code-fg); border-radius: 12px; min-width: 0; }
+.prompt pre { margin: 0; padding: 20px 20px 20px; overflow-x: auto; font: 15px/1.6 var(--mono); white-space: pre-wrap; }
+.prompt .k { color: var(--code-key); font-weight: 700; }
+.prompt-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px 0 20px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--code-key); }
+.copy { font: 700 14px var(--body); color: var(--code-bg); background: var(--code-key); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.copy:hover { filter: brightness(1.08); }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.note strong { color: var(--fg); }
+.route { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+.checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.checklist label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.checklist input { width: 20px; height: 20px; margin-top: 4px; accent-color: var(--accent); flex: none; }
+
+footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <p class="eyebrow">Taller · Área de Matemáticas · CCH</p>
+  <h1>Del guion al video</h1>
+  <p class="lead">Cómo usar IA gratuita para diseñar una estrategia de aprendizaje con video y producir el video, en tres escalones.</p>
+  <p class="byline">Rodrigo Aizpuru · 20 de noviembre de 2026</p>
+</header>
+
+<section aria-labelledby="necesitas">
+  <h2 id="necesitas">Lo que necesitas</h2>
+  <ul>
+    <li>Una cuenta de Google (para Gemini, Gemini Notebook y Colab).</li>
+    <li>Un chat de IA gratuito: <a href="https://gemini.google.com">Gemini</a>, <a href="https://chatgpt.com">ChatGPT</a> o <a href="https://claude.ai">Claude</a>.</li>
+  </ul>
+  <div class="note">
+    <p><strong>La regla de oro:</strong> la IA hace lo mecánico, pero la revisión matemática es tuya. Revisa cada fórmula, cada signo y cada gráfica.</p>
+  </div>
+</section>
+
+<section aria-labelledby="e1">
+  <span class="route">Escalón 1 · Chat web</span>
+  <h2 id="e1">Diseña la estrategia y el guion</h2>
+  <p>Copia este prompt en el chat y cambia lo que está entre corchetes. Tiene cinco partes: rol, contexto, tarea, formato y límites.</p>
+  <div class="prompt">
+    <div class="prompt-bar"><span>Prompt</span><button class="copy" type="button" id="copy-1" data-target="p1">Copiar</button></div>
+<pre id="p1"><span class="k">[Rol]</span> Actúa como diseñador instruccional de matemáticas.
+<span class="k">[Contexto]</span> Doy [Matemáticas II] en el CCH (bachillerato UNAM); a mis alumnos les cuesta [ver cómo a, b y c cambian la parábola y = ax² + bx + c].
+<span class="k">[Tarea]</span> Diseña una actividad de [predecir y comprobar] con un video de [3] minutos.
+<span class="k">[Formato]</span> Entrégame: 1) el objetivo de aprendizaje en una frase; 2) el guion por escenas en una tabla: narración | qué se ve en pantalla | duración; 3) tres preguntas para pausar el video, con su respuesta esperada; 4) una actividad corta para después del video.
+<span class="k">[Límites]</span> Lenguaje sencillo y español de México. El video se verá en [el proyector del salón / el celular de los alumnos].</pre>
+  </div>
+  <p>Si la respuesta no te convence, no empieces de cero: pide cambios en la misma conversación. Por ejemplo: “hazlo más corto”, “agrega un ejemplo con a negativa” o “la pregunta 2 es muy fácil”.</p>
+</section>
+
+<section aria-labelledby="e2">
+  <span class="route">Escalón 2 · Sin código</span>
+  <h2 id="e2">Convierte el guion en video con Gemini Notebook</h2>
+  <p>Gemini Notebook (antes NotebookLM) arma un video narrado a partir de tus fuentes.</p>
+  <ol class="steps">
+    <li>Entra a <a href="https://notebook.google.com">notebook.google.com</a> y crea un cuaderno.</li>
+    <li>En <b>Agregar fuente</b> elige <b>Texto copiado</b> y pega el guion. También sirven tus apuntes o un PDF.</li>
+    <li>En el panel <b>Studio</b> elige <b>Resumen en video</b>.</li>
+    <li>Elige el formato: <b>Corto</b> sale vertical (para celular) y <b>Explicación</b> es más completo. Idioma: español (Latinoamérica).</li>
+    <li>En “¿En qué debería enfocarse el video?” escribe, por ejemplo: <i>Explica a alumnos de bachillerato cómo cambian los parámetros a, b y c de la parábola, con pausas para que predigan.</i></li>
+    <li>Espera, revísalo completo con audio y descárgalo desde el menú ⋮.</li>
+  </ol>
+  <div class="note">
+    <p><strong>Tarda.</strong> En nuestro ensayo, un video corto de 1:27 tardó unos 28 minutos. Genéralo con tiempo.</p>
+    <p><strong>Decide antes dónde se verá.</strong> Si no eliges el formato, lo decide la opción por defecto.</p>
+  </div>
+</section>
+
+<section aria-labelledby="e3">
+  <span class="route">Escalón 3 · Un agente gratuito</span>
+  <h2 id="e3">Anima la matemática con OpenCode y Manim</h2>
+  <p><b>Manim</b> es una herramienta gratuita para animaciones matemáticas. La creó Grant Sanderson para su canal <a href="https://www.youtube.com/@3blue1brown">3Blue1Brown</a>. Las animaciones se describen con código, y la IA escribe ese código por ti.</p>
+  <p>Un <b>agente</b> como OpenCode no solo escribe el código: lo ejecuta, lee los errores y los corrige sin que copies y pegues.</p>
+  <ol class="steps">
+    <li>Descarga la app gratuita desde <a href="https://opencode.ai">opencode.ai</a>.</li>
+    <li>Instala Manim una sola vez. Puedes pedírselo al mismo agente (“instala Manim Community en esta computadora”) o seguir la <a href="https://docs.manim.community/en/stable/installation.html">guía oficial de instalación</a>.</li>
+    <li>En OpenCode abre una carpeta vacía y elige un modelo cuyo nombre diga <b>free</b>.</li>
+    <li>Pídele el video:</li>
+  </ol>
+  <div class="prompt">
+    <div class="prompt-bar"><span>Prompt para el agente</span><button class="copy" type="button" id="copy-2" data-target="p2">Copiar</button></div>
+<pre id="p2">Soy profesor de matemáticas de bachillerato. Hazme un video corto con Manim que muestre cómo a, b y c cambian la parábola y = ax² + bx + c. Textos en español, sin LaTeX. Escribe el archivo, renderízalo y si hay errores corrígelos tú. Al final dime dónde quedó el video.</pre>
+  </div>
+  <div class="note">
+    <p><strong>Mira el video completo.</strong> En nuestro ensayo el modelo gratuito lo hizo en menos de 2 minutos, pero puso el punto del vértice fuera de lugar y encimó dos textos. Se lo dijimos con el dato concreto (“en y = x² − 1.25x el vértice está en x = 0.625”) y lo corrigió en el segundo intento.</p>
+    <p><strong>Si se atora</strong> dos o tres veces en el mismo error, es momento de probar un modelo más capaz.</p>
+    <p>Los modelos gratuitos cambian cada cierto tiempo y algunos pueden usar lo que escribes para entrenarse. No pongas datos de alumnos.</p>
+  </div>
+</section>
+
+<section aria-labelledby="colab">
+  <span class="route">Alternativa sin instalar nada</span>
+  <h2 id="colab">Manim en Google Colab</h2>
+  <p>Colab es como un Google Docs para ejecutar código: corre en los servidores de Google, gratis. Aquí tú haces de puente entre el chat y Colab.</p>
+  <ol class="steps">
+    <li>Pídele a un chat de IA: <i>Escribe una escena de Manim Community que anime y = ax² + bx + c mostrando cómo cambian a, b y c. No uses LaTeX ni MathTex, solo Text. La clase se llama Parabola.</i></li>
+    <li>Entra a <a href="https://colab.research.google.com">colab.research.google.com</a> y crea un cuaderno nuevo.</li>
+    <li>Celda 1, instala Manim (unos 2 minutos; si pide reiniciar la sesión, acepta):</li>
+  </ol>
+  <div class="prompt">
+    <div class="prompt-bar"><span>Celda 1</span><button class="copy" type="button" id="copy-3" data-target="p3">Copiar</button></div>
+<pre id="p3">!sudo apt -qq update &amp;&amp; sudo apt -qq install -y libcairo2-dev libpango1.0-dev ffmpeg
+!pip -q install manim IPython==8.21.0</pre>
+  </div>
+  <ol class="steps" start="4">
+    <li>Celda 2: <code>from manim import *</code></li>
+    <li>Celda 3: en la primera línea escribe <code>%%manim -qm -v WARNING Parabola</code> y abajo pega el código de la IA. Al ejecutarla, el video aparece debajo de la celda.</li>
+    <li>¿Salió un error? Copia el mensaje completo, pégalo en el chat y escribe “corrígelo”. Repite hasta que funcione.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="actividad">
+  <h2 id="actividad">Convierte el video en actividad</h2>
+  <ul>
+    <li>Preguntas dentro del video: <a href="https://edpuzzle.com">Edpuzzle</a> (plan básico gratis), H5P o un Google Forms con las preguntas de pausa.</li>
+    <li>Editar, unir clips o poner subtítulos: Clipchamp o CapCut.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="revision">
+  <h2 id="revision">Lista de revisión antes de publicar</h2>
+  <ul class="checklist">
+    <li><label><input type="checkbox" id="c1">Revisé cada fórmula y cada gráfica.</label></li>
+    <li><label><input type="checkbox" id="c2">Una sola idea, de 3 a 6 minutos.</label></li>
+    <li><label><input type="checkbox" id="c3">Hay pausas donde el alumno piensa o predice.</label></li>
+    <li><label><input type="checkbox" id="c4">Tiene una actividad antes, durante o después.</label></li>
+    <li><label><input type="checkbox" id="c5">El formato corresponde a dónde se verá (proyector o celular).</label></li>
+    <li><label><input type="checkbox" id="c6">Subtítulos y buen contraste.</label></li>
+    <li><label><input type="checkbox" id="c7">No subí datos de mis alumnos a ninguna IA.</label></li>
+    <li><label><input type="checkbox" id="c8">Declaro que usé IA y los recursos tienen licencia de uso.</label></li>
+  </ul>
+</section>
+
+<section aria-labelledby="reto">
+  <h2 id="reto">Tu reto para esta semana</h2>
+  <ol class="steps">
+    <li>Elige un tema que te cueste explicar en el pizarrón porque necesita movimiento.</li>
+    <li>Usa el prompt de cinco partes para la estrategia, el guion y las preguntas.</li>
+    <li>Produce un video de tres minutos por el escalón 2 o el 3 y pruébalo con un grupo.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Rodrigo Aizpuru · <span>rodrigoaiz@gmail.com</span></p>
+  <p>Taller para profesores del Área de Matemáticas, CCH · UNAM</p>
+</footer>
+
+</main>
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var pre = document.getElementById(btn.dataset.target);
+    var text = pre.innerText;
+    function done() { btn.textContent = 'Copiado'; setTimeout(function () { btn.textContent = 'Copiar'; }, 1600); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selecciónalo y copia';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
