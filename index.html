@@ -60,6 +60,9 @@ ol.steps li::marker { font-family: var(--display); font-weight: 700; color: var(
 ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.result { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.result video { width: 100%; height: auto; max-width: 100%; border-radius: 12px; background: #000; }
+.result figcaption { font-size: 15px; color: var(--muted); }
 .katex { white-space: nowrap; font-size: 1.05em; }
 code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft); padding: .1em .35em; border-radius: 4px; overflow-wrap: anywhere; }
 
@@ -177,6 +180,10 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
     <li>Celda 3: en la primera línea escribe <code>%%manim -qm -v WARNING Parabola</code> y abajo pega el código de la IA. Al ejecutarla, el video aparece debajo de la celda.</li>
     <li>¿Salió un error? Copia el mensaje completo, pégalo en el chat y escribe “corrígelo”. Repite hasta que funcione.</li>
   </ol>
+  <figure class="result">
+    <video src="colab-parabola.mp4" controls muted playsinline preload="metadata" width="1280" height="720" aria-label="Animación de Manim hecha en Colab: la parábola y = ax² + bx + c cambia conforme se mueven a, b y c"></video>
+    <figcaption>Así se ve el resultado: este video se hizo en Colab con estos pasos y tardó como un minuto en renderizarse. Las líneas rojas que salen al instalar en la celda 1 son avisos, no errores.</figcaption>
+  </figure>
 </section>
 
 <section aria-labelledby="actividad">
