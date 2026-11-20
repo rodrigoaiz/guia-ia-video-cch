@@ -98,12 +98,35 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
 <section aria-labelledby="necesitas">
   <h2 id="necesitas">Lo que necesitas</h2>
   <ul>
-    <li>Una cuenta de Google (para Gemini, Gemini Notebook y Colab).</li>
     <li>Un chat de IA gratuito: <a href="https://gemini.google.com">Gemini</a>, <a href="https://chatgpt.com">ChatGPT</a> o <a href="https://claude.ai">Claude</a>.</li>
+    <li>Una cuenta de Google, para Gemini y Gemini Notebook.</li>
+    <li>Solo para el escalón 3: una computadora (Windows, Mac o Linux) donde puedas instalar programas.</li>
   </ul>
   <div class="note">
-    <p><strong>La regla de oro:</strong> la IA hace lo mecánico, pero la revisión matemática es tuya. Revisa cada fórmula, cada signo y cada gráfica.</p>
+    <p><strong>La regla de oro:</strong> la IA hace lo mecánico, pero la revisión matemática es tuya. Suena segura aunque esté mal: revisa cada fórmula, cada signo y cada gráfica, y no le creas las referencias sin comprobarlas.</p>
   </div>
+</section>
+
+<section aria-labelledby="metodo">
+  <h2 id="metodo">Antes de abrir la IA: el método</h2>
+  <p>El video solo es pasivo; lo que lo vuelve estrategia es lo que el alumno hace con él. Cinco pasos, y en cada uno sabes quién manda:</p>
+  <ol class="steps">
+    <li><b>Objetivo</b>: qué debe poder hacer el alumno al final. <i>Tú.</i></li>
+    <li><b>Estrategia</b>: cómo y cuándo se usa el video. <i>Tú + IA.</i></li>
+    <li><b>Guion</b>: escenas, narración y pausas. <i>IA, tú revisas.</i></li>
+    <li><b>Producción</b>: imágenes, animación, voz. <i>IA, tú revisas.</i></li>
+    <li><b>Actividad</b>: preguntas y evaluación. <i>Tú + IA.</i></li>
+  </ol>
+  <p>El error más común es empezar por el paso 4: un video bonito sin objetivo no enseña.</p>
+  <p>Seis estrategias para elegir en el paso 2:</p>
+  <ul>
+    <li><b>Aula invertida</b>: ven el video antes; en clase se practica.</li>
+    <li><b>Preguntas incrustadas</b>: el video se pausa y pregunta.</li>
+    <li><b>Predecir y comprobar</b>: “¿qué pasa si \(a\) es negativa?”; pausan, predicen y lo ven.</li>
+    <li><b>Encuentra el error</b>: un procedimiento con un error a propósito.</li>
+    <li><b>El alumno explica</b>: ellos producen un video corto.</li>
+    <li><b>Micro-repaso</b>: de 2 a 4 minutos, un solo procedimiento.</li>
+  </ul>
 </section>
 
 <section aria-labelledby="e1">
@@ -155,16 +178,32 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
 <pre id="p2">Soy profesor de matemáticas de bachillerato. Hazme un video corto con Manim que muestre cómo a, b y c cambian la parábola y = ax² + bx + c. Textos en español, sin LaTeX. Escribe el archivo, renderízalo y si hay errores corrígelos tú. Al final dime dónde quedó el video.</pre>
   </div>
   <div class="note">
-    <p><strong>Mira el video completo.</strong> En nuestro ensayo el modelo gratuito lo hizo en menos de 2 minutos, pero puso el punto del vértice fuera de lugar y encimó dos textos. Se lo dijimos con el dato concreto (“en \(y = x^2 - 1.25x\) el vértice está en \(x = 0.625\)”) y lo corrigió en el segundo intento.</p>
+    <p><strong>Mira el video completo.</strong> En nuestro ensayo el modelo gratuito lo hizo en menos de 2 minutos, pero puso el punto del vértice fuera de lugar y encimó dos textos. El agente lo avisó: no puede ver el video, la revisión es tuya.</p>
+  </div>
+  <p>Cuando encuentres un error, díselo en la misma conversación y con el dato matemático concreto; entre más preciso, mejor corrige. Así se lo pedimos en el ensayo, y lo corrigió en el segundo intento:</p>
+  <div class="prompt">
+    <div class="prompt-bar"><span>Prompt de corrección</span><button class="copy" type="button" id="copy-4" data-target="p4">Copiar</button></div>
+<pre id="p4">Revisé el video y tiene dos errores: el punto verde no está en el vértice de la parábola (por ejemplo en y = x² − 1.25x debería estar en x = 0.625) y los textos de abajo se enciman. Corrígelo y vuelve a renderizar.</pre>
+  </div>
+  <div class="note">
     <p><strong>Si se atora</strong> dos o tres veces en el mismo error, es momento de probar un modelo más capaz.</p>
     <p>Los modelos gratuitos cambian cada cierto tiempo y algunos pueden usar lo que escribes para entrenarse. No pongas datos de alumnos.</p>
   </div>
 </section>
 
+<section aria-labelledby="crecer">
+  <h2 id="crecer">Hacia dónde crecer: una escalera, no un salto</h2>
+  <ol class="steps">
+    <li><b>Chat web gratis</b> (Gemini, ChatGPT, Claude): conversas, copias y pegas. Para empezar hoy.</li>
+    <li><b>Agente gratis</b> (OpenCode con modelos <i>free</i>): escribe, ejecuta y corrige solo. Para producir.</li>
+    <li><b>Agente de pago</b> (Claude Code o Codex de ChatGPT): más calidad y menos errores. Cuando ya lo usas a diario.</li>
+  </ol>
+</section>
+
 <section aria-labelledby="colab">
-  <span class="route">Alternativa sin instalar nada</span>
-  <h2 id="colab">Manim en Google Colab</h2>
-  <p>Colab es como un Google Docs para ejecutar código: corre en los servidores de Google, gratis. Aquí tú haces de puente entre el chat y Colab.</p>
+  <span class="route">Opcional · No lo vimos en el taller</span>
+  <h2 id="colab">Manim sin instalar nada: Google Colab</h2>
+  <p>Si no puedes instalar OpenCode y Manim en tu computadora, esta es otra forma de llegar a la animación. Colab es como un Google Docs para ejecutar código: corre gratis en los servidores de Google con tu misma cuenta. Aquí no hay agente: tú haces de puente entre el chat y Colab.</p>
   <ol class="steps">
     <li>Pídele a un chat de IA: <i>Escribe una escena de Manim Community que anime y = ax² + bx + c mostrando cómo cambian a, b y c. No uses LaTeX ni MathTex, solo Text. La clase se llama Parabola.</i></li>
     <li>Entra a <a href="https://colab.research.google.com">colab.research.google.com</a> y crea un cuaderno nuevo.</li>
@@ -191,6 +230,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
   <ul>
     <li>Preguntas dentro del video: <a href="https://edpuzzle.com">Edpuzzle</a> (plan básico gratis), H5P o un Google Forms con las preguntas de pausa.</li>
     <li>Editar, unir clips o poner subtítulos: Clipchamp o CapCut.</li>
+    <li>Otras formas de producir sin código: Canva para Educación (gratis para docentes) o grabar una construcción de GeoGebra con el grabador de pantalla (Win + Alt + R en Windows, QuickTime en Mac u OBS).</li>
   </ul>
 </section>
 
@@ -203,6 +243,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
     <li><label><input type="checkbox" id="c4">Tiene una actividad antes, durante o después.</label></li>
     <li><label><input type="checkbox" id="c5">El formato corresponde a dónde se verá (proyector o celular).</label></li>
     <li><label><input type="checkbox" id="c6">Subtítulos y buen contraste.</label></li>
+    <li><label><input type="checkbox" id="c9">Si puedo, uso mi voz o mi rostro: generan más confianza que una voz sintética.</label></li>
     <li><label><input type="checkbox" id="c7">No subí datos de mis alumnos a ninguna IA.</label></li>
     <li><label><input type="checkbox" id="c8">Declaro que usé IA y los recursos tienen licencia de uso.</label></li>
   </ul>
@@ -213,8 +254,9 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; font-size: 15px; 
   <ol class="steps">
     <li>Elige un tema que te cueste explicar en el pizarrón porque necesita movimiento.</li>
     <li>Usa el prompt de cinco partes para la estrategia, el guion y las preguntas.</li>
-    <li>Produce un video de tres minutos por el escalón 2 o el 3 y pruébalo con un grupo.</li>
+    <li>Produce un video de tres minutos por el escalón 2 o el 3, pruébalo con un grupo y anota qué preguntaron.</li>
   </ol>
+  <p>Ideas: límites, la derivada como pendiente, transformaciones de funciones, probabilidad con simulaciones, lugar geométrico de la elipse. Compártelo con el área: lo valioso no es que salga perfecto, sino probar el ciclo completo una vez.</p>
 </section>
 
 <footer>
